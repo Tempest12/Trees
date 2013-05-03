@@ -60,6 +60,24 @@ void Tree::draw(void)
     }
 }
 
+void Tree::reset(void)
+{
+	this->envelope = Envelope(Config::convertSettingToString("envelope", "file"));
+	this->attractionPoints.clear();
+	this->spawnAttractionPoints();
+
+	while(this->nodes.size() > 0)
+	{
+		delete this->nodes[0];
+        this->nodes.erase(this->nodes.begin() + 0);
+	}
+
+	Vector3f temp = Vector3f();
+    this->root = new Node(&temp, NULL);
+    this->nodes.push_back(this->root);
+
+}
+
 void Tree::spawnAttractionPoints(void)
 {
 	Vector3f temp = Vector3f();
@@ -89,18 +107,14 @@ void Tree::spawnNewPoints(void)
 	}
 }
 
-void Tree::clearAttractionPoints(void)
-{
-	attractionPoints.clear();
-}
 
-void Tree::update(void)
+bool Tree::update(void)
 {
 	this->spawnNewPoints();
 
 	if(attractionPoints.size() == 0)
 	{
-		return;
+		return false;
 	}
 
     for(int index = 0; (unsigned int)index < attractionPoints.size(); index++)
@@ -140,4 +154,5 @@ void Tree::update(void)
 	}
 
     //std::cout << "Number of nodes is: " << nodes.size() << std::endl;
+    return true;
 }

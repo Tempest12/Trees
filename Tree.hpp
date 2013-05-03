@@ -38,13 +38,13 @@ public:
 	Tree();
 
 	void draw(void);
-    void clearAttractionPoints(void);
-    void removeAttractionPoints(void);
+    
+    void reset(void);
 
     void spawnNewPoints(void);
 
     void spawnAttractionPoints(void);
-    void update(void);
+    bool update(void);
 
 protected:
 private:

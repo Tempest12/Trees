@@ -45,6 +45,8 @@ public:
 
     Vector3f cameraPosition;
 
+    bool simulating = false;
+
 
 protected:
 
@@ -63,13 +65,13 @@ signals:
 public slots:
     void initialize();
 
-    void saveEnvelope(void);
     void loadEnvelope(void);
 
-    void spawnAttractionPoints(void);
-    void clearAttractionPoints(void);
+    void reset(void);
 
     void drawAttractionPoints(int value);
+    void drawEnvelope(int value);
+    void simulate(int value);
 };
 
 

@@ -13,7 +13,7 @@ section tree
 
 	kill_distance 1.0f
 	attraction_distance 3.5f
-	branch_length 0.15f
+	branch_length 0.25f
 }
 
 section colours

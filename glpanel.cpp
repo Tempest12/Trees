@@ -19,6 +19,8 @@ glPanel::glPanel(QWidget *parent) : QGLWidget(parent)
     this->cameraPosition = Vector3f(Config::convertSettingToFloat("camera", "position_x"),
                                     Config::convertSettingToFloat("camera", "position_y"),
                                     Config::convertSettingToFloat("camera", "position_z"));
+
+    this->tree = Tree();
 }
 
 void glPanel::initializeGL()
@@ -70,7 +72,10 @@ void glPanel::paintGL()
 
     //glPanelUtil::drawCircle(2.5f, 25);
 
-    glColor4f(0.0f, 1.0f, 1.0f, 1.0f);
+    if(this->simulating)
+    {
+        this->simulating = this->tree.update();
+    }
 
     this->tree.draw();
 }
@@ -100,38 +105,25 @@ void glPanel::initialize(){
 
 }
 
-void glPanel::saveEnvelope(void)
-{
-    tree.envelope.save();
-}
-
 void glPanel::loadEnvelope(void)
 {
     std::string fileName = QFileDialog::getOpenFileName(this).toStdString();
     //tree.envelope.loadEnvelope(QFileDialog::getOpenFileName(this, ));
 }
 
-void glPanel::spawnAttractionPoints(void)
-{
-   tree.spawnAttractionPoints();
-}
-
-void glPanel::clearAttractionPoints(void)
-{
-    std::cout << "Clear" << std::endl;
-}
-
 void glPanel::drawAttractionPoints(int value)
 {
+    //std::cout << "Attract" << std::endl;
+
     //Value 2 is checked or "ON"
     switch(value)
     {
         case 0:
-            tree.drawAttractionPoints = false;
+            this->tree.drawAttractionPoints = false;
             break;
 
         case 2: 
-            tree.drawAttractionPoints = true;
+            this->tree.drawAttractionPoints = true;
             break;
 
         default:
@@ -140,6 +132,49 @@ void glPanel::drawAttractionPoints(int value)
 
     }
 
+}
+
+void glPanel::drawEnvelope(int value)
+{
+    switch(value)
+    {
+        case 0:
+            this->tree.drawEnvelope = false;
+            break;
+
+        case 2: 
+            this->tree.drawEnvelope = true;
+            break;
+
+        default:
+            std::cout << "Undefined behaviour for a check box." << std::endl;
+            break;
+
+    }
+}
+
+void glPanel::reset(void)
+{
+    //std::cout << "Reset" << std::endl;
+    this->tree.reset();
+}
+
+void glPanel::simulate(int value)
+{
+    switch(value)
+    {
+        case 0:
+            this->simulating = false;
+            break;
+
+        case 2:
+            this->simulating = true;
+            break;
+
+        default:
+            std::cout << "Undefined behavior for a check box." << std::endl;
+            break;
+    }
 }
 
 float xDelta = 5.0f;

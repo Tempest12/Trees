@@ -41,6 +41,8 @@ Node::Node(Vector3f* position, Node* parent) : Point3f(position)
 		float length = between.magnitude();
 		this->angle = 57.2957795*acos(between.z / length);
 
+        std::cout << angle << std::endl;
+
 		if (between.z < 0.0 )
 	    {
 	    	this->angle *= -1;
