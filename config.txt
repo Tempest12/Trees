@@ -1,0 +1,44 @@
+section envelope
+{
+	file Envelope.txt
+}
+
+section tree
+{
+	points 1000
+
+	starting_radius 0.025f
+
+	new_spawns 100
+
+	kill_distance 1.0f
+	attraction_distance 3.5f
+	branch_length 0.15f
+}
+
+section colours
+{
+	attraction_point_used_red 0.0f
+	attraction_point_used_green 1.0f
+	attraction_point_used_blue 1.0f
+	attraction_point_used_alpha 1.0f
+
+	attraction_point_unused_red 1.0f
+	attraction_point_unused_green 1.0f
+	attraction_point_unused_blue 1.0f
+	attraction_point_unused_alpha 1.0f
+
+	envelope_red 0.0f
+	envelope_green 0.75f
+	envelope_blue 0.75f
+	envelope_alpha 1.0f
+}
+
+section camera
+{
+	position_x 0
+	position_y 10
+	position_z -10
+
+	zoom_factor 1
+}
